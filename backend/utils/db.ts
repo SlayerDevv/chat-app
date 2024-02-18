@@ -1,9 +1,10 @@
+import dotenv from 'dotenv'
 import db from 'mongoose'
-require('dotenv').config();
+dotenv.config()
 
 export function connectDB(){
     try {
-         db.connect("mongodb+srv://slayer:123Qsd56&&&&@oddygames.yfnpr7l.mongodb.net/?retryWrites=true&w=majority")
+         db.connect(process.env.MONGO_URL as string)
         console.log("Connected to MongoDB")
     } catch (err){
         console.log(err)
