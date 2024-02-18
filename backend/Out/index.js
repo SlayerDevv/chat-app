@@ -7,22 +7,17 @@ const express_1 = __importDefault(require("express"));
 const socket_io_1 = require("socket.io");
 const http_1 = require("http");
 const app = (0, express_1.default)();
+require('dotenv').config();
 const server = (0, http_1.createServer)(app);
+const db_1 = require("./utils/db");
 const io = new socket_io_1.Server(server, {
     cors: {
         origin: "*",
     }
 });
 app.use(express_1.default.json());
+(0, db_1.connectDB)();
 app.get('/', (req, res) => {
-    let words = ['zebi', 'nemi', 'n9ch', '3tay'];
-    let random = words[Math.floor(Math.random() * words.length)];
-    function randomm() {
-        setTimeout(() => {
-            res.send(random);
-        }, 2000);
-    }
-    randomm();
 });
 server.listen(5001, () => {
     console.log('Server running on port 5001');
